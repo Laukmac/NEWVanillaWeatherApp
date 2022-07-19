@@ -2,6 +2,8 @@
 function formatDate (timestamp){
     let date = new Date (timestamp);
     let hours = date.getHours ();
+    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"] 
+    let day = weekdays[date.getDay ()];
     if (hours < 10 ){
         hours = `0${hours}`;
     }
@@ -9,13 +11,7 @@ function formatDate (timestamp){
     if (minutes < 10 ){
         minutes = `0${minutes}`;
     }
-    
-    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"] 
-    let day = weekdays[date.getDay ()];
-    return  `${day}, ${hours}:${minutes}`;
-
-}
-
+    return  `${day}, ${hours}:${minutes}`;}
 
 
 function showTemperature (response) { 
@@ -33,12 +29,19 @@ currentHumidity.innerHTML = response.data.main.humidity;
 currentWind.innerHTML = Math.round(response.data.wind.speed);
 currentDate.innerHTML = formatDate(response.data.dt * 1000) ;
 weatherIcon.setAttribute ("src", `http://openweathermap.org/img/wn/${response.data. weather[0].icon}@2x.png`);
-weatherIcon.setAttribute("alt", response.data.weather[0].description);
+weatherIcon.setAttribute("alt", response.data.weather[0].description);}
 
+function search(city) {
+    let apiKey = "e304b015eb7af663852222eb9928a3f7";
+    let apiURL= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&wind.speed=imperial`;
+    axios.get(apiURL).then(showTemperature); 
 }
 
+function handleSubmit (event){
+    event.preventDefault();
+    let searchedCity = document.querySelector("#city-input");
+    search (searchedCity.value);
+}
 
-let apiKey = "e304b015eb7af663852222eb9928a3f7";
-let city = "New York";
-let apiURL= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&wind.speed=imperial`;
-axios.get(apiURL).then(showTemperature);
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
