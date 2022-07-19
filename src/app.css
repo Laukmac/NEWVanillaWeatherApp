@@ -45,7 +45,7 @@ ul {
         width: 70px;
     }
     .clearfix-weather-temp strong{
-        color: 33,33,33;
+        color: rgb(33,33,33);
         font-size: 60px;
         line-height: 1;
         font-weight: 400;
@@ -55,3 +55,10 @@ ul {
         font-size: 16px;
         top: -32px;
         }
+
+    .clearfix-weather-temp .active {
+        color: rgb(33,33,33);
+        cursor: default;
+    }
+    .clearfix-weather-temp .active:hover {
+    text-decoration: none;}
