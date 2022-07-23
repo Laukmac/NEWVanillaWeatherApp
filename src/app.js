@@ -13,6 +13,25 @@ function formatDate (timestamp){
     }
     return  `${day}, ${hours}:${minutes}`;}
 
+    function displayForecast (){
+        let weekForecast = document.querySelector("#weather-forecast");
+        let forecastHTML = `<div class="row">`;
+        let days = ["Sat", "Sun", "Mon","Tue", "Wed",];
+        days.forEach (function(day) {
+            forecastHTML = forecastHTML + 
+            ` <div class="col-2">
+                <div class="forecast-date">
+                ${day}
+            </div>
+                <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="44"/>
+                <div class="forecast-temperatures">
+                    <span class="forecast-max-temp"> 19</span>  
+                     <span class="forecast-min-temp"> 12</span></div>
+                     </div>`; });
+        
+        forecastHTML = forecastHTML + `</div>`;
+
+        weekForecast.innerHTML = forecastHTML;}
 
 function showTemperature (response) { 
 let currentCity = document.querySelector("#city"); 
@@ -32,6 +51,7 @@ weatherIcon.setAttribute ("src", `http://openweathermap.org/img/wn/${response.da
 weatherIcon.setAttribute("alt", response.data.weather[0].description);
 celsiusTemperature = response.data.main.temp;}
 
+
 function search(city) {
     let apiKey = "e304b015eb7af663852222eb9928a3f7";
     let apiURL= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&wind.speed=imperial`;
@@ -43,6 +63,9 @@ function handleSubmit (event){
     let searchedCity = document.querySelector("#city-input");
     search (searchedCity.value);
 }
+displayForecast();
+search("new york");
+
 function showFahrenheit (event){
     event.preventDefault();
     let fahrenheitTemperature =  (celsiusTemperature * 9/5) + 32; 
