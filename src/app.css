@@ -62,3 +62,22 @@ ul {
     }
     .clearfix-weather-temp .active:hover {
     text-decoration: none;}
+
+    .forecast{
+        text-align: center;
+    }
+
+    .forecast-date {
+        color: #656363;
+        margin-top: 20px;
+        font-size: 16px;
+    }
+    .forecast-min-temp{
+        color: #878787;
+        font-size: 13px;
+    }
+    .forecast-max-temp{
+        color: #656363;
+        font-size: 13px;
+
+    }
